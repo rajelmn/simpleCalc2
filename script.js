@@ -1,4 +1,3 @@
-
 function Calculator() {
     
     return {
@@ -8,11 +7,15 @@ function Calculator() {
                 case '+':
                      this.operation = '+';
                      return this;
-                     break;
                 case '*':
                     this.operation = '*';
                     return this;
-                    break;
+                case '-':
+                    this.operation = '-';
+                    return this;
+                case '/':
+                    this.operation = '/';
+                    return this;
             }
         },
     
@@ -23,8 +26,10 @@ function Calculator() {
             str.splice(str.indexOf(this.operation), 1);
                    
             
-            const sum = this.operation == '+' ? str.reduce( (a, b) => Number(a) + Number(b) ):
-            str.reduce( (a, b) => Number(a) * Number(b)) 
+            const sum = this.operation == '+' ? str.reduce( (a, b) => Number(a) + Number(b) )
+            :this.operation == '*' ? str.reduce( (a, b) => Number(a) * Number(b)) 
+            :this.operation == '-' ? str.reduce( (a, b) => Number(a) - Number(b) )
+            :this.operation == '/' ? str.reduce( (a, b) => Number(a)/Number(b) ): NaN
             return sum
             
         }
@@ -34,7 +39,7 @@ function Calculator() {
 
 let calc = new Calculator; 
 
-console.log(calc.addMethod('+').calculate("12 + 34")) // 10
+console.log(calc.addMethod('+').calculate("12 + 34")) // 46
 console.log( calc.addMethod('*').calculate("3 * 7")) // 21
-
-// console.log( calc.addMethod('*', (a, b) => a * b, '7 * 9'));
+console.log( calc.addMethod('-').calculate("20 - 10")) // 10
+console.log( calc.addMethod('/').calculate("20 / 5")) // 4
